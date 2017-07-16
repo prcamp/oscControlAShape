@@ -102,6 +102,14 @@ void ofApp::update(){
 	}
 }
 
+void drawTriangle() {
+  ofBeginShape();
+  ofVertex(100,100);
+  ofVertex(50,200);
+  ofVertex(150,200);
+  ofEndShape();
+}
+
 void drawStartBurst(float in1, float in2) {
 	float xPct = (float)(in1); // / (float)(ofGetWidth());
 	float yPct = (float)(in2); // / (float)(ofGetHeight());
@@ -141,6 +149,8 @@ void drawStartBurst(float in1, float in2) {
 void ofApp::draw(){
 
 	drawStartBurst(numPoints, shapeRad);
+
+    drawTriangle();
 
 	ofSetHexColor(0xf9043a);
 	string buf;
