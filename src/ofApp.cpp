@@ -70,6 +70,11 @@ void ofApp::update(){
 				// }
 			}
 
+            if(addr == "/3/xy2") {
+              scale = m.getArgAsFloat(0) * 500;
+              theta = m.getArgAsFloat(1);
+            }
+
 			
 			msg_string += ": ";
 			for(int i = 0; i < m.getNumArgs(); i++){
@@ -102,12 +107,31 @@ void ofApp::update(){
 	}
 }
 
-void drawTriangle() {
+void drawTriangle(float scale, float theta) {
+  // phi (angle of orientation) 0 is "up"
+  // θ (theta) (spread of triangle)  0 < θ < π
+  // hight is how tall it is
+  // int s = 100;
+  // float theta = (TWO_PI/2)/3;
+  int s = scale;
+  theta = theta * TWO_PI/2;
   ofBeginShape();
-  ofVertex(100,100);
-  ofVertex(50,200);
-  ofVertex(150,200);
+  // ofScale(1.0,2.0,1.0);
+  float p0x = 100;
+  float p0y = 100;
+  ofVertex(p0x, p0y);
+  float p1x = p0x + sin(theta/2) * s;
+  float p1y = p0y + +cos(theta/2) * s;
+  cout << "p0: (" <<  p0x << ", " << p0y << "), p1: (" << p1x << ", " << p1y << "), " ;
+  // cout << "sin(90) = " << sin(TWO_PI/4) << endl;
+  ofVertex(p1x, p1y);
+  float p2x = p0x + -sin(theta/2) * s;
+  float p2y = p0y + +cos(theta/2) * s;
+  cout << "p2: (" << p2x << ", " << p2y << ")" << endl;
+  cout << "What are you!: sin(" << theta << "/2) = " << sin(theta/2) << endl;
+  ofVertex(p2x,p2y);
   ofEndShape();
+  
 }
 
 void drawStartBurst(float in1, float in2) {
@@ -150,7 +174,7 @@ void ofApp::draw(){
 
 	drawStartBurst(numPoints, shapeRad);
 
-    drawTriangle();
+    drawTriangle(scale, theta);
 
 	ofSetHexColor(0xf9043a);
 	string buf;

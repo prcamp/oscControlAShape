@@ -35,6 +35,7 @@ class ofApp : public ofBaseApp {
 
 		int mouseX, mouseY;
 		float shapeRad, numPoints;
+        float scale, theta;
 		string mouseButtonState;
     
         ofImage receivedImage;
